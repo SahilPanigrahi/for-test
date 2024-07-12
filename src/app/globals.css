@@ -2,32 +2,97 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+/* Custom card animations */
+.card-hover {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+.card-hover:hover {
+  transform: scale(1.1);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes bounceSlow {
+  0%, 100% {
+    transform: translateY(-25%);
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+  }
+  50% {
+    transform: none;
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+.card-bounce {
+  animation: bounceSlow 3s ease-in-out infinite;
 }
 
+
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  .gradient-text {
+    background: linear-gradient(to right, #1644E9, #D92EF5);
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+
+  .gradient-border {
+    border: 2px solid;
+    border-image-slice: 1;
+    border-width: 2px;
+    border-image-source: linear-gradient(to right, #1644E9, #D92EF5);
+  }
+
+  /* .gradient-curve-border {
+    border: 2px solid;
+    border-image-slice: 1;
+    border-width: 2px;
+    border-radius: 7px;
+    border-image-source: linear-gradient(to right, #1644E9, #D92EF5);
+  } */
+
+  .gradient-curve-border {
+    position: relative;
+    display: inline-block; 
+    padding: 10px; 
+    border-radius: 7px;
+    z-index: 0;
+  }
+  
+  .gradient-curve-border::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 7px;
+    background: linear-gradient(to right, #1644E9, #D92EF5);
+    z-index: -2;
+  }
+  
+  .gradient-curve-border::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    right: 2px;
+    bottom: 2px;
+    border-radius: 5px; 
+    background: white;
+    z-index: -1;
+  }
+
+  .gradient-underline {
+    position: relative;
+    display: inline-block;
+  }
+  .gradient-underline::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -1px; /* Adjust this value to position the underline */
+    width: 100%;
+    height: 1px; /* Adjust this value to change the underline thickness */
+    background: linear-gradient(to right, #1644E9, #D92EF5);
   }
 }
