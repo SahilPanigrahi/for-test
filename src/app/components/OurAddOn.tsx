@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-
+ 
 const OurAddOn = () => {
   return (
     <div className="md:py-[76px] md:pl-[193px] md:pr-[193px] pt-10 lg:mt-0">
